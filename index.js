@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const PORT = 3000;
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 const API_URL = process.env.API_URL;
 
 // Logger setup with custom format
@@ -31,6 +31,11 @@ const logger = winston.createLogger({
     // Additional transports like file can be added here
   ],
 });
+
+if (!API_URL) {
+  logger.error('RPC_ENDPOINT is not set in .env file');
+  process.exit(1); // Exit the process if targetUrl is not set
+}
 
 app.get('/status', (req, res, next) => {
   res.send('This is a proxy service');
