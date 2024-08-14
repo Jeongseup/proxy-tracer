@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/env/bash
 
 curl --location 'http://localhost:3000' \
 --header 'Content-Type: application/json' \
